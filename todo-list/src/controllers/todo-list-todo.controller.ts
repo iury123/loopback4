@@ -28,6 +28,10 @@ export class TodoListTodoController {
     todo: Omit<Todo, 'id'>,
   ) {
     return this.todoListRepo.todos(id).create(todo);
+    // return {
+    //   code: 404,
+    //   message: 'Deu ruim'
+    // }
   }
 
 
