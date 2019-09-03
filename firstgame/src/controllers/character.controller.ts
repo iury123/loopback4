@@ -45,11 +45,13 @@ export class CharacterController {
     character: Character,
   ): Promise<Character> {
 
-    let characterId = 1;
-    while (await this.characterRepository.exists(characterId)) {
-      characterId++;
-    }
-    character.id = characterId;
+    // let characterId = 1;
+    // while (await this.characterRepository.exists(characterId)) {
+    //   characterId++;
+    // }
+    // character.id = characterId;
+
+
     return await this.characterRepository.create(character);
   }
 
@@ -115,7 +117,7 @@ export class CharacterController {
       },
     },
   })
-  async findById(@param.path.number('id') id: number): Promise<Character> {
+  async findById(@param.path.string('id') id: string): Promise<Character> {
     return this.characterRepository.findById(id);
   }
 
@@ -127,7 +129,7 @@ export class CharacterController {
     },
   })
   async updateById(
-    @param.path.number('id') id: number,
+    @param.path.string('id') id: string,
     @requestBody({
       content: {
         'application/json': {
@@ -148,7 +150,7 @@ export class CharacterController {
     },
   })
   async replaceById(
-    @param.path.number('id') id: number,
+    @param.path.string('id') id: string,
     @requestBody() character: Character,
   ): Promise<void> {
     await this.characterRepository.replaceById(id, character);
@@ -161,7 +163,7 @@ export class CharacterController {
       },
     },
   })
-  async deleteById(@param.path.number('id') id: number): Promise<void> {
+  async deleteById(@param.path.string('id') id: string): Promise<void> {
     await this.characterRepository.deleteById(id);
   }
 }
