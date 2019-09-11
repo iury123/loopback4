@@ -2,7 +2,7 @@ import {
   Filter,
   repository
 } from '@loopback/repository';
-import { patch, param, requestBody, del } from '@loopback/rest';
+import { patch, param, requestBody, del, get } from '@loopback/rest';
 import { Armor, Weapon, Skill, Character } from '../models';
 import { WeaponRepository, ArmorRepository, SkillRepository, CharacterRepository } from '../repositories';
 
@@ -160,7 +160,14 @@ export class UpdateControllerController {
     return char;
   }
 
-
+  @get('/updatecharacter/{id}', {
+    responses: {
+      '200': {
+        description: 'armor, weapon, and skill info',
+        content: {},
+      },
+    },
+  })
   async findById(
     @param.path.string('id') id: string
   ): Promise<any[]> {

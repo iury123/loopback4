@@ -1,17 +1,27 @@
 import { Entity, model, property, hasOne } from '@loopback/repository';
-import { v4 as uuid } from 'uuid';
+import { PermissionKey } from '../authorization/permission-key';
 import { Armor } from './armor.model';
 import { Weapon } from './weapon.model';
 import { Skill } from './skill.model';
 
 @model({ settings: {} })
 export class Character extends Entity {
+
   @property({
     type: 'string',
     id: true,
-    default: () => uuid(),
+    required: true,
   })
-  id?: string;
+  email?: string;
+
+  @property({
+    type: 'string',
+    required: true
+  })
+  password?: string;
+
+  @property.array(String)
+  permissions: PermissionKey[];
 
   @property({
     type: 'string',
